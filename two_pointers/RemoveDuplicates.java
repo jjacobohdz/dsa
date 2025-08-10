@@ -10,6 +10,9 @@ Example 2:
 Input: [2, 2, 2, 11]
 Output: 2
 Explanation: The first two elements after removing the duplicates will be [2, 11].
+
+Leetcode:
+https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
 */
 class RemoveDuplicates {
     public static int removeDuplicates(int[] arr) {
