@@ -13,6 +13,9 @@ Example 2:
 Input: n = 1, k = 1
 Output: [[1]]
 Explanation: There is 1 choose 1 = 1 total combination.
+
+Leetcode:
+https://leetcode.com/problems/combinations/description/
 */
 import java.util.*;
 class Combinations {
