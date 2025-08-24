@@ -30,6 +30,42 @@ class Trie {
     public int getWordCount(String prefix) {
         return getWordCount(prefix, 0);
     }
+	
+	public List<String> getWordsForPrefix(String prefix) {
+		List<String> words = new ArrayList<>();
+		getWordsForPrefix(words, prefix, 0);
+		return words;
+	}
+	
+	private void getWordsForPrefix(List<String> words, String prefix, int index) {
+		if (index == prefix.length()) {
+		    addWords(words, prefix);
+		    return;
+		}
+		
+		char c = prefix.charAt(index);
+		Trie node = children.get(c);
+		if (node == null) {
+		    return;
+		}
+		node.getWordsForPrefix(words, prefix, index + 1);
+	}
+	
+	private void addWords(List<String> words, String prefix) {
+	    for (char c: children.keySet()) {
+            prefix += c;
+
+            Trie child = children.get(c);
+            if (child.isEndOfWord) {
+                words.add(new String(prefix));
+            }
+            
+            // add other words in the trie (ie. cart)
+            child.addWords(words, prefix);
+
+            prefix = prefix.substring(0, prefix.length() - 1);
+	    }
+	}
     
     private int getWordCount(String prefix, int index) {
         if (index == prefix.length()) {
@@ -97,6 +133,9 @@ class Trie {
         trie.addWord("cat");
         trie.addWord("car");
         trie.addWord("rat");
+        trie.addWord("cart");
+        trie.addWord("cartoon");
+        trie.addWord("rate");
         System.out.println(trie.containsWord("bat"));
         System.out.println(trie.containsWord("cat"));
         System.out.println(trie.containsWord("car"));
@@ -116,5 +155,10 @@ class Trie {
         System.out.println(trie.getWordCount("ra"));
         System.out.println(trie.getWordCount("ab"));
         System.out.println(trie.getWordCount("rat"));
+        System.out.println("=========");
+        
+        System.out.println(trie.getWordsForPrefix("ca"));
+        System.out.println(trie.getWordsForPrefix("r"));
+        System.out.println(trie.getWordsForPrefix("bl"));
     }
 }
